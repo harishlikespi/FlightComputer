@@ -13,7 +13,7 @@ bool AirspeedSensor :: avail(){
 
 float AirspeedSensor :: read(){
     Wire.requestFrom(0x28, 4); 
-    uint8_t val[4] = {Wire.read(), Wire.read(), Wire.read(), Wire.read()};
+    int val[4] = {Wire.read(), Wire.read(), Wire.read(), Wire.read()};
     int16_t rawDP= 0;
     rawDP =  ((byte1 & 0b00111111) << 8) | byte2;
 
@@ -24,6 +24,6 @@ float AirspeedSensor :: read(){
     return v;
 }
 
-void AirSpeedSensor :: printAirspeed(float velocity){
+void AirspeedSensor :: printAirspeed(float velocity){
   Serial.print(velocity);
 }
