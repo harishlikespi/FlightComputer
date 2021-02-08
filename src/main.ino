@@ -5,12 +5,14 @@
 #include <SparkFun_Ublox_Arduino_Library.h>
 #include <u-blox_config_keys.h>
 #include <MS5611.h>
+#include <AirspeedSensor.h>
 
 SFE_UBLOX_GPS GPS; //GPS object
 Adafruit_BNO055 BNO = Adafruit_BNO055(55,0x29); //Orientation sensor object (ID, address)
 MS5611 barometer; //barometer object
+AirspeedSensor ASI;
 double refPressure; //variable to hold pressure shortly after sensor begins to calculate relative pressure
-const int I2C_ADDRESS = 0x28; // I2C address of Pitot Tube pressure sensor
+ // I2C address of Pitot Tube pressure sensor
 //SoftwareSerial mySerial(10, 11); // (RX, TX) pins 10 and 11 on arduino board
 
 
@@ -58,6 +60,7 @@ void loop() {
   print_orientation();
   print_pressure();
   print_coordinates(); 
+  print_airspeed();
   delay(1000);
 
 }
@@ -99,6 +102,6 @@ void print_coordinates(){
 }
 
 void print_airspeed(){
-
+    float airspeed = ASI.read();
+    Serial.print(airspeed);
 }
-//SoftwareSerial mySerial(10, 11); // (RX, TX) pins 10 and 11 on arduino board
